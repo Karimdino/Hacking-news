@@ -40,6 +40,44 @@ body
 /* * * * * * * * * * * * * * * * * * * * * * *
  * Karim
  * * * * * * * * * * * * * * * * * * * * * * */
+ footer{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    padding-top: 750px;
+
+}
+
+.footer-span a{
+    color: rgba(8, 0, 0, 0.829);
+    font-size: 15px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    align-content: space-between;
+
+}
+
+#search{
+    margin-top:12px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.search{
+    
+    color:rgba(0, 0, 0, 0.517);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+
+  
+}
+
+.footer-container .footer-span a:hover{
+
+    color: rgb(69, 5, 5);
+}
+
 
 
 
