@@ -46,3 +46,80 @@ body
 /* * * * * * * * * * * * * * * * * * * * * * *
  * Abdülaziz
  * * * * * * * * * * * * * * * * * * * * * * */
+
+ .resitem
+ {
+     width: 100%;
+     outline: none;
+     margin-bottom: 20px;
+ }
+ .resitem div
+ {
+     padding: 0px;
+ }
+ .resitem a
+ {
+     text-decoration: none;
+     color: #000;
+ }
+ .resitem .layout_1
+ {
+     display: flex;
+     width: 100%;
+     font-family: 'Poppins', sans-serif;
+ }
+ .resitem .layout_1 div
+ {
+     background-color: rgb(130,160,180);
+     border-bottom: none;
+     padding: 4px;
+ }
+ .resitem .layout_1 div:nth-child(1)
+ {
+     border-right: none;
+ }
+ .resitem .layout_1 div:nth-child(2)
+ {
+     border-left: none;
+ }
+ .resitem .layout_2
+ {
+     padding: 6px;
+     background-color: rgb(130,160,180);
+     box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+     border-top-right-radius: 6px;
+     border-bottom-left-radius: 6px;
+     border-bottom-right-radius: 6px;
+     max-height: 200px;
+     overflow: auto;
+     font-family: 'Source Sans Pro', sans-serif;
+ }
+ .resitem .layout_3
+ {
+     padding: 12px;
+     line-height: 26px;
+     background-color: rgb(130,160,180);
+     box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+     border-top-right-radius: 6px;
+     border-bottom-left-radius: 6px;
+     border-bottom-right-radius: 6px;
+     text-align: justify;
+     max-height: 200px;
+     overflow: auto;
+     font-family: 'Source Sans Pro', sans-serif;
+ }
+ .resitem .crdate
+ {
+     padding-right: 10px;
+     font-size: 10px;
+     border-top-right-radius: 6px;
+ }
+ .resitem .author
+ {
+     padding-left: 10px;
+     border-top-left-radius: 6px;
+ }
+ .resitem .headline
+ {
+     text-align: center;
+ }
