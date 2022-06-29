@@ -33,6 +33,12 @@
      line-height: 22px;
  }
  
+main
+{
+    margin-top: 80px;
+    padding-bottom: 100px;
+}
+
  /* * * * * * * * * * * * * * * * * * * * * * *
   * Rene
   * * * * * * * * * * * * * * * * * * * * * * */
@@ -49,6 +55,10 @@
    -ms-flex-align: center;
    align-items: center;
    overflow: hidden;
+   position: fixed; /* Element an der angegegeben Position dauerhaft festigen */
+   width: 80%; /* Breite des Elements 80% der Sichtfeld anpassen */
+   left: 10%; /* Das Element von links aus 10% reinrücken */
+   top: 0px; /* Element an der Position 0 auf der vertikalen Ebene festlegen */
  }
  
  .nav-container .logo {
@@ -213,12 +223,20 @@
  /* * * * * * * * * * * * * * * * * * * * * * *
   * Karim
   * * * * * * * * * * * * * * * * * * * * * * */
+
   footer{
+    border: 1px solid rgb(160,170,180);
+    border-bottom: none;
+    padding: 6px;
+     background-color: #fff;
      display: flex;
      justify-content: center;
      justify-items: center;
-     padding-top: 700px;
- 
+     /*padding-top: 700px;*/
+     position: fixed; /* Element an der angegegeben Position dauerhaft festigen */
+     bottom: 0; /* Element wird am unteren Rand festgesetzt */
+     width: 80%; /* Breite des Elements 80% der Sichtfeld anpassen */
+     left: 10%; /* Das Element von links aus 10% reinrücken */
  }
  
  .footer-span a{
@@ -241,9 +259,7 @@
      
      color:rgba(0, 0, 0, 0.517);
      font-family: Arial, Helvetica, sans-serif;
-     font-size: 15px;
- 
-   
+     font-size: 15px; 
  }
  
  .footer-container .footer-span a:hover{
@@ -251,14 +267,24 @@
      color: rgb(232, 26, 26);
  }
  
+footer input[type="text"]
+{
+    outline: none;
+    margin-left: 10px;
+    border: 1px solid rgb(170,180,190);
+    border-radius: 6px;
+    box-shadow: inset 4px 4px 4px rgba(0,0,0,0.1);
+}
+
  /* * * * * * * * * * * * * * * * * * * * * * *
   * Abdülaziz
   * * * * * * * * * * * * * * * * * * * * * * */
  
   .resitem
   {
-      width: 100%;
+      width: 80%;
       outline: none;
+      margin: 0 auto;
       margin-bottom: 20px;
   }
   .resitem div
@@ -278,7 +304,7 @@
   }
   .resitem .layout_1 div
   {
-      background-color: rgb(130,160,180);
+      background-color: rgb(230,230,240);
       border-bottom: none;
       padding: 4px;
   }
@@ -293,7 +319,7 @@
   .resitem .layout_2
   {
       padding: 6px;
-      background-color: rgb(130,160,180);
+      background-color: rgb(230,230,240);
       box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
@@ -306,7 +332,7 @@
   {
       padding: 12px;
       line-height: 26px;
-      background-color: rgb(130,160,180);
+      background-color: rgb(230,230,240);
       box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
