@@ -217,7 +217,7 @@ body
     display: flex;
     justify-content: center;
     justify-items: center;
-    padding-top: 750px;
+    padding-top: 700px;
 
 }
 
@@ -248,7 +248,7 @@ body
 
 .footer-container .footer-span a:hover{
 
-    color: rgb(214, 109, 109);
+    color: rgb(232, 26, 26);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * *
