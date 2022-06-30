@@ -20,7 +20,17 @@ let what = 0;
 
 function switch_menu_item( id )
 {
-
+    // Verbindung zum Inhalts-Element "main" aufbauen
+    const main = document.querySelector("main");
+    // Den Inhalt wird erstmal ausgeblendet
+    if ( main )
+        main.style.display = "none";
+    // Der Loader wird verbunden
+    const loader = document.querySelector("#loader");
+    // Der Loader wird eingeblendet
+    if ( loader )
+        loader.style.display = "block";
+    // *** //
     const menuNEW = document.getElementById("new");
     const menuPAST = document.getElementById("past");
     const menuCOMMENT = document.getElementById("comment");
@@ -86,7 +96,7 @@ function menu_past(filter = "")
     // *** //
     switch_menu_item("past");
     // *** //
-    grap( "http://hn.algolia.com/api/v1/search_by_date?tags=story" + filter, 
+    grap( "http://hn.algolia.com/api/v1/search_by_date?tags=front_page" + filter, 
           function(data) 
           {
                 for( let peace of data.hits )
@@ -135,6 +145,11 @@ function menu_ask(filter = "")
  * Karim
  * * * * * * * * * * * * * * * * * * * * * * */
 
+// Diese Funktion wird beim Drücken der Entertaste
+// im Suchfeld und beim Klicken auf den "Find" 
+// Button ausgeführt, ladet denselben Inhalt
+// nach dem Suchbegriff gefiltert.
+
 function filterResult( event )
 {
 
@@ -160,6 +175,79 @@ function filterResult( event )
 
 }
 
+// Diese Funktion schließt das Dialogfenster
+
+function closeExternalSite ()
+{
+    const popupbox = document.querySelector(".external");
+    const button = document.querySelector(".external #exbutton");
+    // *** //
+    if ( popupbox && button )
+        popupbox.style.display = "none";
+}
+
+// Diese Funktion ladet das Dialogfenster mit einem Inhalt
+
+function popupExternalSite ( key )
+{
+    const popupbox = document.querySelector(".external");
+    const title = document.querySelector(".external #extitle");
+    const content = document.querySelector(".external #excontent");
+    // *** //
+    if ( popupbox && title && content )
+    {
+        let url = ""; let typeOfContent = 0;
+        // *** //
+        switch ( key )
+        {
+            case 'guidelines':
+                title.innerText = "Welcome to our GuideLines";
+                url = "https://news.ycombinator.com/newsguidelines.html";
+                break;
+            case 'faq':
+                title.innerText = "Frequently Asked Questions";
+                url = "https://news.ycombinator.com/newsfaq.html";
+                break;
+            case 'lists':
+                title.innerText = "Some Lists :-)";
+                url = "https://news.ycombinator.com/lists";
+                break;
+            case 'api':
+                title.innerText = "The Application Programming Interface";
+                url = "https://github.com/HackerNews/API";
+                break;
+            case 'security':
+                title.innerText = "Some Information About Security Issues";
+                url = "https://news.ycombinator.com/security.html";
+                break;
+            case 'legal':
+                title.innerText = "Legal Information";
+                url = "http://www.ycombinator.com/legal/";
+                break;
+            case 'applytoyc':
+                title.innerText = "Apply To YC";
+                url = "http://www.ycombinator.com/apply/";
+                break;
+            case 'contact':
+                title.innerText = "You wanna contact us?";
+                typeOfContent = 1;
+                break;
+        }
+        // *** //
+        switch ( typeOfContent )
+        {
+            case 0:
+                content.innerHTML = `<iframe src="${url}" height="400" width="100%"></iframe>`;
+                break;
+            case 1:
+                content.innerHTML = "<div style='text-align:center;margin-top:100px;color:red;'>We are currently unavailable :-) Sorry</div>";
+                break;
+        }
+        // *** //
+        popupbox.style.display = "block";
+    }
+}
+
 /* * * * * * * * * * * * * * * * * * * * * * *
  * Abdülaziz
  * * * * * * * * * * * * * * * * * * * * * * */
@@ -178,11 +266,62 @@ function streamIn( value )
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Gibt einen HTMl-Coe zurück wenn es einen Story gibt
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+function giveStory( story_id, story_text, story_title, story_url )
+{
+    if ( story_id != null && story_title != null && story_text != null )
+    {
+        let url = "";
+        // *** //
+        if ( story_url != null )
+            url = `<a href="${story_url}" target = "_blank">Weiter lesen...</a>`;
+        // *** //
+        return '<div class = "layout_5">' +
+        `<h1>${story_title}</h1>` +
+        `${story_text}` +
+        `<hr>` +
+        `<div class = "alignright">` +
+        `StoryId: ${story_id}` +
+        `  |  ${url}` +
+        `</div>` +
+        '</div>';
+    }
+    else return "";
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Erzeugt einen neuen Eintrag von Typ1 & sendet es an streamIn
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-function addType1( { url, author, created_at, title } )
+function addType1( { url, author, created_at, title, num_comments, comment_text, story_id, story_text, story_title, story_url } )
 {
+    let kommentar = ""; let kommentartyp = null;
+    // *** //
+    if ( num_comments > 0 )
+    {
+        kommentartyp = "comment1";
+        // *** //
+        if ( comment_text === null )
+        {
+            kommentar =
+            '<div class = "layout_4">' +
+            `<i>Der Kommentarfeld ist leer</i>` +
+            '</div>';
+        }
+        else
+        {
+            kommentar =
+            '<div class = "layout_4">' +
+            `${comment_text}` +
+            '</div>';    
+        }
+    }
+    else kommentartyp = "comment2";
+    // *** //
+    let story = giveStory( story_id, story_text, story_title, story_url );
+    // *** //
     streamIn( `<a href="${url}" target = "_blank">`  +
             '<div class = "layout_1">'  +
             `<div class = "author"><b>Von</b> ${author}</div>`  +
@@ -190,25 +329,51 @@ function addType1( { url, author, created_at, title } )
             '</div>'  +
             '<div class = "layout_2">'  +
             `<div class = "headline">${title}</div>` +
+            story +
+            `<div class = "${kommentartyp}">Kommentare: ${num_comments}</div>` +
+            kommentar +
             '</div>' +
             '</a>' );
+    // Der Loader wird verbunden
+    const loader = document.querySelector("#loader");
+    // Der Loader wird ausgeblendet
+    if ( loader )
+        loader.style.display = "none";
+    // Verbindung zum Inhalts-Element "main" aufbauen
+    const main = document.querySelector("main");
+    // Den Inhalt wird angezeigt
+    if ( main )
+        main.style.display = "block";
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Erzeugt einen neuen Eintrag von Typ2 & sendet es an streamIn
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-function addType2( { url, author, created_at, comment_text } )
+function addType2( { url, author, created_at, comment_text, story_id, story_text, story_title, story_url } )
 {
+    let story = giveStory( story_id, story_text, story_title, story_url );
+    // *** //
     streamIn( `<a href="${url}" target = "_blank">` +
             '<div class = "layout_1">' +
             `<div class = "author"><b>Von</b> ${author}</div>` +
             `<div class = "crdate"><b>Datum</b> ${created_at}</div>` +
             '</div>' +
+            story +
             '<div class = "layout_3">' +
             `${comment_text}` +
             '</div>' +
             '</a>' );
+    // Der Loader wird verbunden
+    const loader = document.querySelector("#loader");
+    // Der Loader wird ausgeblendet
+    if ( loader )
+        loader.style.display = "none";
+    // Verbindung zum Inhalts-Element "main" aufbauen
+    const main = document.querySelector("main");
+    // Den Inhalt wird angezeigt
+    if ( main )
+        main.style.display = "block";
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
