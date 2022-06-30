@@ -295,9 +295,9 @@ function giveStory( story_id, story_text, story_title, story_url )
  * Erzeugt einen neuen Eintrag von Typ1 & sendet es an streamIn
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-function addType1( { url, author, created_at, title, num_comments, comment_text, story_id, story_text, story_title, story_url } )
+function addType1( { url, author, created_at, title, num_comments, comment_text, points, story_id, story_text, story_title, story_url } )
 {
-    let kommentar = ""; let kommentartyp = null;
+    let kommentar = ""; let kommentartyp = null; let punktetyp = null;
     // *** //
     if ( num_comments > 0 )
     {
@@ -320,6 +320,11 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
     }
     else kommentartyp = "comment2";
     // *** //
+    if ( points > 0 )
+        punktetyp = "comment1";
+    else
+        punktetyp = "comment2";
+    // *** //
     let story = giveStory( story_id, story_text, story_title, story_url );
     // *** //
     streamIn( `<a href="${url}" target = "_blank">`  +
@@ -330,9 +335,9 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
             '<div class = "layout_2">'  +
             `<div class = "headline">${title}</div>` +
             story +
-            `<div class = "${kommentartyp}">Kommentare: ${num_comments}</div>` +
+            `<span class = "${kommentartyp}">Kommentare: ${num_comments}</span> | <span class="${punktetyp}">Punkte ${points}</span>` +
             kommentar +
-            '</div>' +
+            `</div>` +
             '</a>' );
     // Der Loader wird verbunden
     const loader = document.querySelector("#loader");
