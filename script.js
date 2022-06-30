@@ -104,11 +104,11 @@ function menu_comment(filter = "")
     // *** //
     switch_menu_item("comment");
     // *** //
-    grap( "http://hn.algolia.com/api/v1/search_by_date?tags=story" + filter, 
+    grap( "http://hn.algolia.com/api/v1/search?query=bar&tags=comment" + filter, 
           function(data) 
           {
                 for( let peace of data.hits )
-                    addType1( peace );
+                    addType2( peace );
           }
     );
 }

@@ -28,8 +28,8 @@
  {
      max-width: 1000px;
      margin: 0 auto;
-     font-family: 'Montserrat', sans-serif;
-     font-size: 12px;
+     font-family: Open Sans;
+     font-size: 16px;
      line-height: 22px;
  }
  
@@ -37,6 +37,7 @@ main
 {
     margin-top: 80px;
     padding-bottom: 100px;
+    font-family: Open Sans;
 }
 
  /* * * * * * * * * * * * * * * * * * * * * * *
@@ -59,6 +60,7 @@ main
    width: 80%; /* Breite des Elements 80% der Sichtfeld anpassen */
    left: 10%; /* Das Element von links aus 10% reinrücken */
    top: 0px; /* Element an der Position 0 auf der vertikalen Ebene festlegen */
+
  }
  
  .nav-container .logo {
@@ -110,10 +112,10 @@ main
  .nav-container .navbar ul li a {
    text-decoration: none;
    color: #cccccc;
-   font-family: "Montserrat";
-   font-weight: 800;
+   font-weight: 600;
    font-size: 18px;
    text-transform: uppercase;
+   letter-spacing: 0.5px;
    display: block;
    height: 60px;
    line-height: 60px;
@@ -243,7 +245,6 @@ main
      color: rgba(8, 0, 0, 0.829);
      font-size: 15px;
      text-decoration: none;
-     font-family: Arial, Helvetica, sans-serif;
      align-content: space-between;
  
  }
@@ -258,7 +259,6 @@ main
  .search{
      
      color:rgba(0, 0, 0, 0.517);
-     font-family: Arial, Helvetica, sans-serif;
      font-size: 15px; 
  }
  
@@ -282,7 +282,7 @@ footer input[type="text"]
  
   .resitem
   {
-      width: 80%;
+      width: 100%;
       outline: none;
       margin: 0 auto;
       margin-bottom: 20px;
@@ -300,13 +300,13 @@ footer input[type="text"]
   {
       display: flex;
       width: 100%;
-      font-family: 'Poppins', sans-serif;
+    	font-family: Open Sans;
   }
   .resitem .layout_1 div
   {
       background-color: rgb(230,230,240);
       border-bottom: none;
-      padding: 4px;
+      padding: 10px;
   }
   .resitem .layout_1 div:nth-child(1)
   {
@@ -318,19 +318,19 @@ footer input[type="text"]
   }
   .resitem .layout_2
   {
-      padding: 6px;
+      padding: 20px;
       background-color: rgb(230,230,240);
-      box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
       max-height: 200px;
       overflow: auto;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: Open Sans;
   }
   .resitem .layout_3
   {
-      padding: 12px;
+      padding: 20px;
       line-height: 26px;
       background-color: rgb(230,230,240);
       box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
@@ -340,7 +340,7 @@ footer input[type="text"]
       text-align: justify;
       max-height: 200px;
       overflow: auto;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: Open Sans;
   }
   .resitem .crdate
   {
@@ -354,6 +354,7 @@ footer input[type="text"]
       border-top-left-radius: 6px;
   }
   .resitem .headline
-  {
+  {   font-size: 20px;
+    line-height: 30px;
       text-align: center;
   }
