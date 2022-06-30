@@ -122,7 +122,7 @@ function menu_ask(filter = "")
     // *** //
     switch_menu_item("ask");
     // *** //
-    grap( "http://hn.algolia.com/api/v1/search_by_date?tags=story" + filter, 
+    grap( "http://hn.algolia.com/api/v1/search_by_date?tags=ask_hn" + filter, 
           function(data) 
           {
                 for( let peace of data.hits )
