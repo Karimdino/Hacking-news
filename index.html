@@ -39,31 +39,42 @@
       </nav>
     </div>
 
-        <!-- Inhalt -->
+        <!-- Abdülaziz -->
         <main>
 
         </main>
 
+        <div id = "loader" style = "display:none;">
+            <img src="1488.gif">
+        </div>
+
         <!-- Karim -->
+        <div class = "external" style = "display:none;">
+            <div class = "titlebar" id = "extitle"></div>
+            <div class = "contentarea" id = "excontent"></div>
+            <div class = "buttonbar">
+                <button id = "exbutton" onclick= "closeExternalSite()">Close</button>
+            </div>
+        </div>
+
         <footer>
             <div class="footer-container">
                 <span class="footer-span">
-                    <a href="">Guidelines</a>
+                    <a href="javascript:popupExternalSite('guidelines');">Guidelines</a>
                     |
-                    <a href="#">FAQ</a>
+                    <a href="javascript:popupExternalSite('faq');">FAQ</a>
                     |
-                    <a href="#">Lists</a>
+                    <a href="javascript:popupExternalSite('lists');">Lists</a>
                     |
-                    <a href="#">API</a>
+                    <a href="javascript:popupExternalSite('api');">API</a>
                     |
-                    <a href="#">Secuirty</a>
+                    <a href="javascript:popupExternalSite('security');">Secuirty</a>
                     |
-                    <a href="#">Legal</a>
+                    <a href="javascript:popupExternalSite('legal');">Legal</a>
                     |
-                    <a href="#">Apply to YC</a>
+                    <a href="javascript:popupExternalSite('applytoyc');">Apply to YC</a>
                     |
-                    <a href="#">Contact</a>
-                    |
+                    <a href="javascript:popupExternalSite('contact');">Contact</a>
                 </span>
                 
                 <br>
@@ -71,6 +82,7 @@
                 <div id="search">
                     <label class="search">Search:</label>
                     <input type="text" class="search2" placeholder = "Filter result...">
+                    <button onclick="filterResult">Find</button>
                 </div>
 
             </div>
