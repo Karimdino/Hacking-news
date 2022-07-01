@@ -11,6 +11,20 @@
 let what = 0;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Die Einträge werden beim Einfügen auf die Seite mit
+ * einem Zähler durchnummieriert
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+let counter = 0;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Dieser Array erhält die Menge der geladenen Einträge und
+ * wird für den Seitenwechsel verwendet
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+let entries = [];
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Sobald ein Menüpunkt angeklickt wird, so werden die 
  * möglichen Formatierungen aller Menüpunkte zurückgesetzt und
  * die Formatierung der aktuellen Menüpunkt festgesetzt, sodass
@@ -20,6 +34,8 @@ let what = 0;
 
 function switch_menu_item( id )
 {
+    // Setzt den Zähler wieder auf 0
+    counter = 0;
     // Verbindung zum Inhalts-Element "main" aufbauen
     const main = document.querySelector("main");
     // Den Inhalt wird erstmal ausgeblendet
@@ -83,6 +99,8 @@ function menu_new(filter = "")
           {
                 for( let peace of data.hits )
                     addType1( peace );
+                // *** //
+                initPagination();
           }
     );
 }
@@ -101,6 +119,8 @@ function menu_past(filter = "")
           {
                 for( let peace of data.hits )
                     addType1( peace );
+                // *** //
+                initPagination();
           }
     );
 }
@@ -119,6 +139,8 @@ function menu_comment(filter = "")
           {
                 for( let peace of data.hits )
                     addType2( peace );
+                // *** //
+                initPagination();
           }
     );
 }
@@ -137,6 +159,8 @@ function menu_ask(filter = "")
           {
                 for( let peace of data.hits )
                     addType1( peace );
+                // *** //
+                initPagination();
           }
     );
 }
@@ -253,6 +277,87 @@ function popupExternalSite ( key )
  * * * * * * * * * * * * * * * * * * * * * * */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Erzeugt für das erste Verwenden beim Laden einer Content
+ * die Seitennavigation und blendet entsprechend Elemente aus
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+function initPagination ()
+{
+    let pages = 0; let pager = 0;
+    // *** //
+    entries = [];
+    // *** //
+    entries.push( [] );
+    // *** //
+    for ( let next = 1; next < counter + 1; next++ )
+    {
+        let entry = document.getElementById(`entry_${next}`);
+        // *** //
+        if ( entry )
+        {
+            entries[pages].push(entry);
+            // *** //
+            if ( next < 10 )
+                entry.style.display = "block";
+            else
+                entry.style.display = "none";
+            // *** //
+            pager++;
+            // *** //
+            if (pager == 10 )
+            {
+                pages++;
+                pager = 0;
+                entries.push( [] );
+            }
+        }
+    }
+    // *** //
+    const pagination = document.getElementById(`pagination`);
+    // *** //
+    if ( pagination )
+    {
+        pagination.innerHTML = "";
+        // *** //
+        if ( pages === 0 )
+            pagination.style.display = "none";
+        else
+        {
+            pagination.style.display = "block";
+            // *** //
+            for ( let next = 0; next < pages; next++ )
+                pagination.innerHTML += `<button onclick = "nextPage(${next})">${next + 1}</button>`;
+        }
+    }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Blendet die vorherige Liste aus und blendet die nächste
+ * Seite ein
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+function nextPage( paginationNumber )
+{
+    for ( let next = 0; next < entries[paginationNumber].length; next++ )
+    {
+        if ( paginationNumber > 0 )
+        {
+            let entryOld = entries[paginationNumber - 1][next];
+            // *** //
+            if ( entryOld )
+                entryOld.style.display = "none";
+        }
+        // *** //
+        let entryNew = entries[paginationNumber][next];
+        // *** //
+        if ( entryNew )
+            entryNew.style.display = "block";
+    }
+    // *** //
+    window.scrollTo(0,0);
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Fügt einen neuen Eintrag in den MAIN-Tag unter BODY-Tag
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
@@ -297,7 +402,7 @@ function giveStory( story_id, story_text, story_title, story_url )
 
 function addType1( { url, author, created_at, title, num_comments, comment_text, points, story_id, story_text, story_title, story_url } )
 {
-    let kommentar = ""; let kommentartyp = null; let punktetyp = null;
+    let kommentar = ""; let kommentartyp = null; let punktetyp = null; let a1 = ""; let a2 = "";
     // *** //
     if ( num_comments > 0 )
     {
@@ -325,11 +430,19 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
     else
         punktetyp = "comment2";
     // *** //
+    if ( url != null )
+    {
+        a1 = `<a href="${url}" target = "_blank">`;
+        a2 = '</a>';
+    }
+    // *** //
     let story = giveStory( story_id, story_text, story_title, story_url );
     // *** //
-    streamIn( `<a href="${url}" target = "_blank">`  +
-            '<div class = "layout_1">'  +
-            `<div class = "author"><b>Von</b> ${author}</div>`  +
+    counter++;
+    // *** //
+    streamIn( `<div id = "entry_${counter}">` + a1 +
+            `<div class = "layout_1"><div class = "counter">${counter}</div>` +
+            `<div class = "author"><b>von</b> ${author}</div>`  +
             `<div class = "crdate"><b>Datum</b> ${created_at}</div>`  +
             '</div>'  +
             '<div class = "layout_2">'  +
@@ -338,7 +451,7 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
             `<span class = "${kommentartyp}">Kommentare: ${num_comments}</span> | <span class="${punktetyp}">Punkte ${points}</span>` +
             kommentar +
             `</div>` +
-            '</a>' );
+            a2 + '</div>' );
     // Der Loader wird verbunden
     const loader = document.querySelector("#loader");
     // Der Loader wird ausgeblendet
@@ -357,18 +470,28 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
 
 function addType2( { url, author, created_at, comment_text, story_id, story_text, story_title, story_url } )
 {
+    let a1 = ""; let a2 = "";
+    // *** //
     let story = giveStory( story_id, story_text, story_title, story_url );
     // *** //
-    streamIn( `<a href="${url}" target = "_blank">` +
-            '<div class = "layout_1">' +
-            `<div class = "author"><b>Von</b> ${author}</div>` +
+    if ( url != null )
+    {
+        a1 = `<a href="${url}" target = "_blank">`;
+        a2 = '</a>';
+    }
+    // *** //
+    counter++;
+    // *** //
+    streamIn( `<div id = "entry_${counter}">` + a1 +
+            `<div class = "layout_1"><div class = "counter">${counter}</div>` +
+            `<div class = "author"><b>von</b> ${author}</div>` +
             `<div class = "crdate"><b>Datum</b> ${created_at}</div>` +
             '</div>' +
             story +
             '<div class = "layout_3">' +
             `${comment_text}` +
             '</div>' +
-            '</a>' );
+            a2 + '</div>' );
     // Der Loader wird verbunden
     const loader = document.querySelector("#loader");
     // Der Loader wird ausgeblendet
