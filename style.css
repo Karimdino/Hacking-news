@@ -22,7 +22,7 @@
  {
      margin: 0;
      padding: 0;
-     background-color: rgb(80,90,112);
+     background-color: rgb(100,150,150);
  }
  
  body
@@ -50,7 +50,7 @@ main
   * * * * * * * * * * * * * * * * * * * * * * */
  
  .nav-container {
-   height: 60px;
+   height: 60px; z-index: 9999;
    background-color: #3a778e;
    display: -webkit-box;
    display: -ms-flexbox;
@@ -461,7 +461,7 @@ button:active
   }
   .resitem .layout_4
   {
-      padding: 20px;
+      padding: 10px;
       line-height: 26px;
       background-color: #FFF;
       box-shadow: inset 4px 4px 4px rgba(0,0,0,0.1);
