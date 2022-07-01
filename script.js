@@ -412,7 +412,7 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
         {
             kommentar =
             '<div class = "layout_4">' +
-            `<i>Der Kommentarfeld ist leer</i>` +
+            `<i>Das Kommentarfeld ist leer</i>` +
             '</div>';
         }
         else
@@ -448,7 +448,7 @@ function addType1( { url, author, created_at, title, num_comments, comment_text,
             '<div class = "layout_2">'  +
             `<div class = "headline">${title}</div>` +
             story +
-            `<span class = "${kommentartyp}">Kommentare: ${num_comments}</span> | <span class="${punktetyp}">Punkte ${points}</span>` +
+            `<span class = "${kommentartyp}">Kommentare: ${num_comments}</span> | <span class="${punktetyp}">Aufrufe: ${points}</span>` +
             kommentar +
             `</div>` +
             a2 + '</div>' );
