@@ -41,7 +41,7 @@ main
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 30px;
-    padding-bottom: 100px;
+    padding-bottom: 140px;
     font-family: Open Sans;
 }
 
@@ -240,7 +240,6 @@ main
      display: flex;
      justify-content: center;
      justify-items: center;
-     /*padding-top: 700px;*/
      position: fixed; /* Element an der angegegeben Position dauerhaft festigen */
      bottom: 0; /* Element wird am unteren Rand festgesetzt */
      width: 80%; /* Breite des Elements 80% der Sichtfeld anpassen */
@@ -356,6 +355,22 @@ button:active
   * Abdülaziz
   * * * * * * * * * * * * * * * * * * * * * * */
  
+.pagination
+{
+    position: absolute; /* Element an der angegegeben Position dauerhaft festigen */
+    margin-top: -46px;
+    width: 80%; /* Breite des Elements 80% der Sichtfeld anpassen */
+    left: 10%; /* Das Element von links aus 10% reinrücken */
+    height: 35px;
+    background-color: rgba(255,255,255,0.92);
+    border-top: 1px solid rgb(160,170,180);
+    border-left: 1px solid rgb(160,170,180);
+    border-right: 1px solid rgb(160,170,180);
+    justify-content: center;
+    text-align: center;
+    padding: 2px;
+}
+
 #loader
 {
     height: 128px;
@@ -404,6 +419,19 @@ button:active
   .resitem .layout_1 div:nth-child(2)
   {
       border-left: none;
+  }
+  .resitem .layout_1 .counter 
+  {
+      position: absolute;
+      border-radius: 50%;
+      border: none;
+      padding: 5px 12px;
+      margin-top: -16px;
+      margin-left: -16px;
+      color: #fff;
+      border: 2px solid rgb(255,255,255);
+      background-color:rgb(160,120, 160);
+      box-shadow: inset -4px -4px 4px rgb(0,0,0,0.2);
   }
   .resitem .layout_2
   {
@@ -465,8 +493,12 @@ button:active
   }
   .resitem .author
   {
-      padding-left: 10px;
+      padding-left: 20px;
       border-top-left-radius: 6px;
+  }
+  .resitem .author b
+  {
+      font-size: 10px;
   }
   .resitem .headline
   {   font-size: 20px;
